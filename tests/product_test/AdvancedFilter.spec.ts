@@ -1,5 +1,5 @@
 import { test, expect, Page, Locator } from '@playwright/test';
-import { LoginPage } from '../../pages/LoginModule';
+import { LoginPage } from '../../pages/login_module/loginPage';
 
 function panel(page: Page, title: string): Locator {
   return page.locator(
@@ -22,7 +22,7 @@ test('Advanced Filter – Category filter shows correct category in Product List
   
   await page.getByRole('button').nth(1).click();
   await page.waitForURL('**/Home/Product');
- 
+
   await page.getByText('Advanced Filter').nth(2).click();
 
   const panels = [
