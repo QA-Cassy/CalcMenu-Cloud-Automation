@@ -3,6 +3,8 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
+  /* Timeout */
+  timeout: 30 *1000,
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -12,7 +14,7 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [['list'], ['html', { outputFolder: 'test-report' }]],
 
   /* Shared settings for all the projects below. */
   use: {
@@ -27,10 +29,17 @@ export default defineConfig({
 
     // Collect trace on first retry
     trace: 'on-first-retry',
+
+    // Screensize for screenshot and video recording
+    viewport: { width: 1280, height: 720 },
+    
+    // Generate screenshot after test
+    screenshot: 'on',
+
+    // Generate video recording after test
+    video: 'on',
+
   },
-
-
-
 
   /* Configure projects for major browsers */
   projects: [
@@ -38,7 +47,7 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
-
+    /*
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
@@ -50,13 +59,9 @@ export default defineConfig({
     },
 
     {
-
       name: 'msedge',
-     use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    },
-
-    
-    
+      use: { ...devices['Desktop Edge'], channel: 'msedge' },
+    },*/
 
     /* Test against mobile viewports. */
     // {
