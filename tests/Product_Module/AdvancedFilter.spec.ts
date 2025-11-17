@@ -1,5 +1,5 @@
 import { test, expect, Page, Locator } from '@playwright/test';
-import { LoginPage } from '../../pages/LoginModule'; 
+import { LoginPage } from '../../pages/LoginModule';
 
 function panel(page: Page, title: string): Locator {
   return page.locator(
@@ -8,49 +8,54 @@ function panel(page: Page, title: string): Locator {
   );
 }
 
-test('Advanced Filter – Verify all panels then apply Category filter', async ({ page }) => {
- 
+test('Advanced Filter – Category filter shows correct category in Product List', async ({ page }) => {
   const loginPage = new LoginPage(page);
 
+  
+  // LOGIN 
+  
   await loginPage.gotoLogin();
-  await loginPage.loginWithValidCredentials(); 
+  await loginPage.loginWithValidCredentials();
   await page.waitForURL('**/Home/Dashboard');
 
-  //  NAVIGATE TO PRODUCT MODULE 
-
+  // NAVIGATE TO PRODUCT MODULE 
+  
   await page.getByRole('button').nth(1).click();
   await page.waitForURL('**/Home/Product');
-
-  // Open Advanced Filter
+ 
   await page.getByText('Advanced Filter').nth(2).click();
 
-  await expect(panel(page, 'Include')).toBeVisible();
-  await expect(panel(page, 'Category')).toBeVisible();
-  await expect(panel(page, 'Supplier')).toBeVisible();
-  await expect(panel(page, 'Brand')).toBeVisible();
-  await expect(panel(page, 'Allergens')).toBeVisible();
-  await expect(panel(page, 'Keywords')).toBeVisible();
-  await expect(panel(page, 'Extra Attributes')).toBeVisible();
-  await expect(panel(page, 'Nutrients')).toBeVisible();
-  await expect(panel(page, 'Conservation Method')).toBeVisible();
-  await expect(panel(page, 'CO2-Score')).toBeVisible();
-  await expect(panel(page, 'Date Created')).toBeVisible();
-  await expect(panel(page, 'Price')).toBeVisible();
-  await expect(panel(page, 'Date Modified')).toBeVisible();
-  await expect(panel(page, 'Nutri-Score')).toBeVisible();
-  await expect(panel(page, 'Translation')).toBeVisible();
-  await expect(panel(page, 'Used as ingredient')).toBeVisible();
+  const panels = [
+    'Include', 'Category', 'Supplier', 'Brand', 'Allergens', 'Keywords',
+    'Extra Attributes', 'Nutrients', 'Conservation Method', 'CO2-Score',
+    'Date Created', 'Price', 'Date Modified', 'Nutri-Score', 'Translation',
+    'Used as ingredient'
+  ];
 
-  
-  //APPLY CATEGORY FILTER 
-  
+  for (const p of panels) {
+    await expect(panel(page, p)).toBeVisible();
+  }
+
+  //  APPLY CATEGORY FILTER
+  const expectedCategory = 'CO114 - fruits et noix';
+
   await panel(page, 'Category').click();
- const categoryCheckboxId = '#cat_prod894-input';
-  await page.locator(categoryCheckboxId).check();
 
-  // 3. Apply the filter
-  await page.getByRole('button', { name: 'Go to search results' }).click();
+  const categoryCheckboxId = '#cat_prod894-input';
+  const categoryCheckbox = page.locator(categoryCheckboxId);
+  await expect(categoryCheckbox).toBeVisible();
+  await categoryCheckbox.check();
 
-  // 4. Optional: just wait for page to settle (no list validation)
-  await page.waitForLoadState('networkidle');
+  // Click "Go to search results"
+  const goToResultsButton = page.getByRole('button', { name: /Go to search results/i });
+  await expect(goToResultsButton).toBeVisible();
+  await goToResultsButton.click();
+
+
+  await page.waitForURL('**/Home/Product');
+  await expect(page.getByText('Product List')).toBeVisible();
+
+  await expect(page.locator('app-product')).toContainText(expectedCategory);
+
+  console.log('✔ Category filter validated: Product List displays', expectedCategory);
 });
