@@ -1,0 +1,49 @@
+{
+  "cookies": [
+    {
+      "name": "g_state",
+      "value": "{\"i_l\":0,\"i_ll\":1763355123278,\"i_b\":\"rHcUp2ItHXsxkQMU2X5fMMWYrLKnUy278K1prgoWss4\"}",
+      "domain": "sodexolu.calcmenu.com",
+      "path": "/",
+      "expires": 1778907123,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "LwsVqFbHe2PfYUMHBrxJkw%3D%3D",
+      "value": "7VI5m48ijpMCogEmAMGvP%2FC9qK8V44VOuibkun8xZzHb5gH8w3XWmUFBgLIjY4b0i1LQolZhktVKGj%2FrXOexH4Uzt2Kd4oaoR87XoZluuvd9bXhNn1J8vbWuseGgjRYo7kSTdO30fzrsgjG2iyjn4SUiKLKQt%2FojJbsggGpgGX0rGTCEbwqNXuCXlDaBycOnBAxdT2iTkpm4DGwZxuzwaP7l7vj%2FmqXsTXWTH2r1Zfh7xX7QZ44j0jlPrLxiTopjNCbfVSUjRgdOicfpG%2B3bIyHy34%2BT7vbph6yf9qmxsmiVRZn4QK6H1l6YINFU2SS%2B",
+      "domain": "sodexolu.calcmenu.com",
+      "path": "/",
+      "expires": 1794891126,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "WeGZMAZocAH74aZ8YzksZw%3D%3D",
+      "value": "JP5jWBCAkckRekikj24utTRJIF%2FdYACeXcFXgccBszo%3D",
+      "domain": "sodexolu.calcmenu.com",
+      "path": "/",
+      "expires": 1794891127,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://sodexolu.calcmenu.com",
+      "localStorage": [
+        {
+          "name": "egs_logout_performed",
+          "value": "1763355120663"
+        },
+        {
+          "name": "egs_clients",
+          "value": "{\"1763355121158-esb2agj\":1763355127168}"
+        }
+      ]
+    }
+  ]
+}
