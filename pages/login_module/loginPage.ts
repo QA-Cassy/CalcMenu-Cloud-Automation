@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 import { sodexoLu } from '../../src/utils/environment';
 
 export class LoginPage {
@@ -31,11 +31,31 @@ export class LoginPage {
   async login(email: string, password: string) {
     await this.emailInput.fill(email);
     await this.passwordInput.fill(password);
+
+    if (!email || !password) {
+      return;
+    }
+
     await this.loginButton.click();
   }
 
   // LOGIN WITH VALID CREDENTIALS
   async loginWithValidCredentials() {
     await this.login(this.validEmail, this.validPassword);
+  }
+
+  // ASSERT FOR INVALID EMAIl
+  async assertInvalidEmaildAddress() {
+    await expect(this.page.getByText('This E-mail address does not exists')).toBeVisible();
+  }
+
+  // ASSERT FOR INVALID PASSWORD
+  async assertInvalidPassword() {
+    await expect(this.page.getByText('Wrong password')).toBeVisible();
+  }
+
+  // ASSERT FOR DISABLED LOGIN BUTTON
+  async assertDisabledLoginButton() {
+    await expect(this.loginButton).toBeDisabled();
   }
 }
