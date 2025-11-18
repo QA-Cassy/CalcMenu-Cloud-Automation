@@ -1,5 +1,14 @@
 import 'dotenv/config';
 
+// INVALID CREDENTIALS
+export const invalidData = {
+    user: {
+        invalidEmail: process.env.INVALID_EMAIL!,
+        invalidPassword: process.env.INVALID_PASSWORD!,
+        unregisteredEmail: process.env.UNREGISTERED_EMAIL!,
+    }
+}
+
 // SODEXOLU ENTERPRISE
 export const sodexoLu = {
     environment: {
