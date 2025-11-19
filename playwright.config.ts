@@ -25,7 +25,6 @@ export default defineConfig({
     headless: false,
 
   
-
     // Collect trace on first retry
     trace: 'on-first-retry',
 
