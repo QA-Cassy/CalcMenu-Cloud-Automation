@@ -98,7 +98,7 @@ test('TC_003: Verify Category expand popup', async ({ page }) => {
 });
 
 // Supplier Filter
-test.describe('TS_002: Advanced Filter Functionality - Supplier', () => {
+test.describe('TS_002: Supplier Filter Functionality ', () => {
 
   let loginPage: LoginPage;
 

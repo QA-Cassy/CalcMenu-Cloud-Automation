@@ -24,8 +24,7 @@ export default defineConfig({
     // Run headed so you can see the browser
     headless: false,
 
-    // Always start tests with saved login session
-    storageState: 'loginState.json',
+  
 
     // Collect trace on first retry
     trace: 'on-first-retry',
