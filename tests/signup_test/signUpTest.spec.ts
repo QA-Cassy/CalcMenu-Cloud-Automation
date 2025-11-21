@@ -9,7 +9,7 @@ import { EmailVerificationPage } from '../../pages/signup_module/emailVerificati
 
 test.describe('TS_01: Sign Up Functionality', () => {
 
-    test('TS01_TC001: Sign up with valid email and valid password', async ({ page }) => {
+    test('[@generic][@regression] TS01_TC001: Sign up with valid email and valid password', async ({ page }) => {
 
         const loginPage = new LoginPage(page);
         const signUpPage = new SignUpPage(page);
