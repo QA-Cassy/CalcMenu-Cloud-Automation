@@ -331,7 +331,8 @@ test.describe('TS_003: Used as Ingredient Filter Functionality', () => {
     test.setTimeout(90000);
     loginPage = new LoginPage(page);
 
-    await loginPage.gotoLogin();
+    await loginPage.goToLogin(`${sodexoLu.environment.localURL}`);
+
     await loginPage.login(
       sodexoLu.environment.email,
       sodexoLu.environment.password
@@ -439,7 +440,8 @@ test.describe('TS_004: Keywords Filter Functionality', () => {
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
 
-    await loginPage.gotoLogin();
+    await loginPage.goToLogin(`${sodexoLu.environment.localURL}`);
+
     await loginPage.login(
       sodexoLu.environment.email,
       sodexoLu.environment.password
