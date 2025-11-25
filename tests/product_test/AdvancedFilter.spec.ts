@@ -17,7 +17,7 @@ test.describe('TS_001:Category Filter Functionality', () => {
     test.setTimeout(60000)
     loginPage = new LoginPage(page);
 
-    await loginPage.gotoLogin();
+    await loginPage.goToLogin(`${sodexoLu.environment.localURL}`);
     await loginPage.login(
       sodexoLu.environment.email,
       sodexoLu.environment.password
@@ -192,7 +192,7 @@ test.describe('TS_002: Supplier Filter Functionality ', () => {
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
 
-    await loginPage.gotoLogin();
+    await loginPage.goToLogin(`${sodexoLu.environment.localURL}`);
     await loginPage.login(
       sodexoLu.environment.email,
       sodexoLu.environment.password

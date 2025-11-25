@@ -21,8 +21,8 @@ export class LoginPage {
   }
   
   // OPEN CALCMENU SIGN IN PAGE
-  async gotoLogin() {
-    await this.page.goto(`${sodexoLu.environment.stageURL}`, {
+  async goToLogin(link: string) {
+    await this.page.goto(link, {
       waitUntil: 'domcontentloaded',
     });
   }
