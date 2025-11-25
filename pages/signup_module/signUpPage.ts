@@ -35,14 +35,6 @@ export class SignUpPage {
         await popup.getByRole('checkbox', { name: 'I agree to the Terms of' }).check();
         await popup.getByRole('button', { name: 'SUBMIT' }).click();
         await popup.getByRole('button', { name: 'Okay' }).click();
-
-        
-        // await this.nameField.fill(name);
-        // await this.emailField.fill(email);
-        // await this.passwordField.fill(password);
-        // await this.termsCheckbox.check();
-        // await this.submitButton.click();
-        // await this.okButton.click();
     }
 
 

@@ -30,14 +30,6 @@ export class EmailVerificationPage {
         await popup.getByRole('button', { name: 'LOGIN' }).click();
         await popup.getByRole('button', { name: 'Confirm' }).click();
         await popup.getByRole('button', { name: 'Close' }).click();
-        
-        // await this.page.goto(link, { waitUntil: 'domcontentloaded' });
-        // await this.calcMenuCloudButton.click();
-        // await this.emailField.fill(email);
-        // await this.passwordField.fill(password);
-        // await this.loginButton.click();
-        // await this.confirmButton.click();
-        // await this.closeButton.click();
 
         await expect(popup).toHaveURL(generic.environment.homeURL);
     }
