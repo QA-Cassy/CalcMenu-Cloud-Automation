@@ -7,6 +7,20 @@ export const api = {
     }
 }
 
+// TERMS OF SERVICE
+export const termsOfService = {
+    link: {
+        enURL: process.env.TERMS_OF_SERVICE_EN_URL!,
+    }
+}
+
+// PRIVACY POLICY
+export const privacyPolicy = {
+    link: {
+        enURL: process.env.PRIVACY_POLICY_EN_URL!,
+    }
+}
+
 // INVALID CREDENTIALS
 export const invalidData = {
     user: {
