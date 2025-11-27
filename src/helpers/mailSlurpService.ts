@@ -32,4 +32,22 @@ export class MailSlurpService {
         return verificationLink;
     }
 
+    async waitForResetPasswordEmail(inboxId: string, timeout = 30000) {
+        const email = await this.client.waitForLatestEmail(inboxId, timeout);
+        const urls = email.body?.match(/https?:\/\/[^\s"]+/g) || [];
+        console.log('Links found:', urls); // TO CHECK URLS IN EMAIL VERIFICATION
+
+        const resetPasswordLink = urls.find(
+            u => 
+                u.includes('appasiaqa.calcmenu.com') &&
+                u.includes('Recovery%2FPassword/')
+        )
+
+        if (!resetPasswordLink) {
+            throw new Error("RESET PASSWORD EMAIL LINK NOT FOUND");
+        }
+
+        return resetPasswordLink;
+    }
+
 }
