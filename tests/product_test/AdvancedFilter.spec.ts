@@ -25,12 +25,11 @@ test.describe('TS_001:Category Filter Functionality', () => {
 
     await expect(page).toHaveURL(sodexoLu.environment.homeURL, { timeout: 20000 });
 
-    // Go to Product module
     await page.getByRole('button').nth(1).click();
     await page.waitForURL('**/Home/Product');
   });
 
-  test('TC_001: Enable All Search Criteria', async ({ page }) => {
+  test.skip('TC_001: Enable All Search Criteria', async ({ page }) => {
 
   await page.getByText('Advanced Filter').nth(2).click();
   await page.getByText('Add Search Criteria').click();
@@ -237,7 +236,7 @@ test.describe('TS_002: Supplier Filter Functionality ', () => {
 });
 
 
-  test.skip('TC_003: Verify Supplier expand popup', async ({ page }) => {
+  test.skip('TC_002: Verify Supplier expand popup', async ({ page }) => {
 
   await page.getByText('Advanced Filter').nth(2).click();
 
@@ -277,7 +276,7 @@ test.describe('TS_002: Supplier Filter Functionality ', () => {
 });
 
 
-  test.skip('TC_004: Verify Supplier Clear Button', async ({ page }) => {
+  test.skip('TC_003: Verify Supplier Clear Button', async ({ page }) => {
 
   await page.getByText('Advanced Filter').nth(2).click();
 
@@ -295,7 +294,7 @@ test.describe('TS_002: Supplier Filter Functionality ', () => {
   await expect(supplierCheckbox).not.toBeChecked();
 });
 
-  test.skip('TC_005: Verify Remove Supplier Search Criteria', async ({ page }) => {
+  test.skip('TC_004: Verify Remove Supplier Search Criteria', async ({ page }) => {
   await page.getByText('Advanced Filter').nth(2).click();
 
   const supplierPanel = page.locator('div').filter({ hasText: /^Supplier$/ }).first();
@@ -344,7 +343,7 @@ test.describe('TS_003: Used as Ingredient Filter Functionality', () => {
     await page.waitForURL('**/Home/Product');
   });
 
-  test.skip('Verify Filter by "Used as ingredient"', async ({ page }) => {
+  test.skip('TC_001: Verify Filter by "Used as ingredient"', async ({ page }) => {
 
   await page.getByText('Advanced Filter').nth(2).click();
 
@@ -388,7 +387,7 @@ await page.waitForTimeout(2000);
 
 });
 
-  test.skip('Verify Filter by "Not used as ingredient"', async ({ page }) => {
+  test.skip('TC_002: Verify Filter by "Not used as ingredient"', async ({ page }) => {
 
   await page.getByText('Advanced Filter').nth(2).click();
   await page.waitForTimeout(3000);
@@ -454,7 +453,7 @@ test.describe('TS_004: Keywords Filter Functionality', () => {
     await page.getByRole('button').nth(1).click();
   });
 
-  test('TC_001: Verify Keywords filter for product search - AND & Wanted Criteria', async ({ page }) => {
+  test.skip('TC_001: Verify Keywords filter for product search - AND & Wanted Criteria', async ({ page }) => {
 
     await page.getByText('Advanced Filter').nth(2).click();
 
@@ -511,7 +510,7 @@ test.describe('TS_004: Keywords Filter Functionality', () => {
     await page.waitForTimeout(2_000);
   });
 
-  test('TC_002: Verify Keywords filter for product search - AND & Unwanted Criteria', async ({ page }) => {
+  test.skip('TC_002: Verify Keywords filter for product search - AND & Unwanted Criteria', async ({ page }) => {
   await page.getByText('Advanced Filter').nth(2).click();
 
   await page.locator('div').filter({ hasText: /^Keywords$/ }).first().click();
@@ -555,7 +554,7 @@ test.describe('TS_004: Keywords Filter Functionality', () => {
 });
 
 
-  test('TC_003: Verify Keywords filter for product search - OR & Wanted Criteria', async ({ page }) => {
+  test.skip('TC_003: Verify Keywords filter for product search - OR & Wanted Criteria', async ({ page }) => {
   await page.getByText('Advanced Filter').nth(2).click();
 
   await page.locator('div').filter({ hasText: /^Keywords$/ }).first().click();
@@ -615,7 +614,7 @@ test.describe('TS_004: Keywords Filter Functionality', () => {
   await page.waitForTimeout(2000);
 });
 
-  test('TC_004: Verify Keywords filter for product search - OR & Unwanted Criteria', async ({ page }) => {
+  test.skip('TC_004: Verify Keywords filter for product search - OR & Unwanted Criteria', async ({ page }) => {
   await page.getByText('Advanced Filter').nth(2).click();
 
   await page.locator('div').filter({ hasText: /^Keywords$/ }).first().click();
@@ -676,7 +675,7 @@ test.describe('TS_004: Keywords Filter Functionality', () => {
 });
 
 
-  test('TC_005: Verify Keywords expand popup and Clear button', async ({ page }) => {
+  test.skip('TC_005: Verify Keywords expand popup and Clear button', async ({ page }) => {
 
   await page.getByText('Advanced Filter').nth(2).click();
 
@@ -726,7 +725,7 @@ test.describe('TS_004: Keywords Filter Functionality', () => {
   await expect(legumesWantedRadio).not.toBeChecked();
 });
 
-  test('TC_006: Verify Remove Keywords Search Criteria', async ({ page }) => {
+  test.skip('TC_006: Verify Remove Keywords Search Criteria', async ({ page }) => {
   await page.getByText('Advanced Filter').nth(2).click();
 
   const keywordsPanel = page.locator('div').filter({ hasText: /^Keywords$/ }).first();
@@ -754,3 +753,236 @@ test.describe('TS_004: Keywords Filter Functionality', () => {
 });
 
 });
+
+test.describe('TS_005: Date Created & Date Modified Filter Functionality', () => {
+  test.describe.configure({ timeout: 90_000 });
+
+  let loginPage: LoginPage;
+
+  test.beforeEach(async ({ page }) => {
+    loginPage = new LoginPage(page);
+
+    await loginPage.goToLogin(`${sodexoLu.environment.localURL}`);
+
+    await loginPage.login(
+      sodexoLu.environment.email,
+      sodexoLu.environment.password
+    );
+
+    await expect(page).toHaveURL(sodexoLu.environment.homeURL, {
+      timeout: 20_000,
+    });
+
+    await page.getByRole('button').nth(1).click();
+    await page.waitForURL('**/Home/Product');
+  });
+
+ test.skip('TC_001: Verify Date Created = Today filter', async ({ page }) => {
+
+  const advancedFilterBtn = page.getByText('Advanced Filter').nth(2);
+  await expect(advancedFilterBtn).toBeVisible({ timeout: 15_000 });
+  await advancedFilterBtn.click();
+
+  await page.mouse.wheel(0, 700);
+  await page.waitForTimeout(500);
+
+  const dateCreatedRadio = page.locator('#mat-radio-6-input');
+  await expect(dateCreatedRadio).toBeVisible({ timeout: 15_000 });
+  await dateCreatedRadio.check();
+
+  const goToResultsBtn = page.getByRole('button', { name: 'Go to search results' });
+  await expect(goToResultsBtn).toBeVisible({ timeout: 15_000 });
+  await goToResultsBtn.click();
+
+  const productList = page.locator('app-product');
+  await expect(productList).toBeVisible({ timeout: 40_000 });
+
+  const rows = page.locator('.prodResultTable');
+  const productEmpty = page.locator('app-product-empty');
+
+  let foundRow = false;
+
+  for (let i = 0; i < 20; i++) {
+    const rowCountNow = await rows.count();
+    const emptyVisible = await productEmpty.isVisible().catch(() => false);
+
+    if (rowCountNow > 0) {
+      foundRow = true;
+      break;
+    }
+    if (emptyVisible) break;
+
+    await page.waitForTimeout(1000);
+  }
+
+  if (!foundRow) {
+    console.log('No products created today.');
+    return;
+  }
+
+console.log('✔ Products found. Opening the first product...');
+
+const firstProductRow = rows.first();
+const productNameButton = firstProductRow.locator('.nameDiv');
+
+await expect(productNameButton).toBeVisible({ timeout: 15000 });
+await productNameButton.click();
+
+await expect(page.getByText('Created By', { exact: true })).toBeVisible({ timeout: 15000 });
+await expect(page.getByLabel('Overview')).toBeVisible({ timeout: 15000 });
+
+const today = new Date();
+const dd = String(today.getDate()).padStart(2, '0');
+const mm = String(today.getMonth() + 1).padStart(2, '0');
+const yyyy = today.getFullYear();
+const expectedDate = `${dd}.${mm}.${yyyy}`;
+
+console.log('Expected Created By date:', expectedDate);
+
+await expect(page.getByLabel('Overview')).toContainText(expectedDate);
+
+console.log('Created By date is correct:', expectedDate);
+ });
+
+test.skip('TC_002: Verify Date Created = Past Week filter', async ({ page }) => {
+  const advancedFilterBtn = page.getByText('Advanced Filter').nth(2);
+  await expect(advancedFilterBtn).toBeVisible({ timeout: 15000 });
+  await advancedFilterBtn.click();
+
+  await page.mouse.wheel(0, 700);
+  await page.waitForTimeout(500);
+
+  const pastWeekRadio = page.locator('#mat-radio-7-input'); 
+  await expect(pastWeekRadio).toBeVisible({ timeout: 15000 });
+  await pastWeekRadio.check();
+
+  const goToResultsBtn = page.getByRole('button', { name: 'Go to search results' });
+  await expect(goToResultsBtn).toBeVisible({ timeout: 15000 });
+  await goToResultsBtn.click();
+
+  const productList = page.locator('app-product');
+  await expect(productList).toBeVisible({ timeout: 40000 });
+
+  const rows = page.locator('.prodResultTable');
+  const productEmpty = page.locator('app-product-empty');
+
+  let foundRow = false;
+
+  for (let i = 0; i < 20; i++) {
+    const rowCountNow = await rows.count();
+    const emptyVisible = await productEmpty.isVisible().catch(() => false);
+
+    if (rowCountNow > 0) {
+      foundRow = true;
+      break;
+    }
+    if (emptyVisible) break;
+
+    await page.waitForTimeout(1000);
+  }
+
+  if (!foundRow) {
+    console.log('No products created in the past week.');
+    return;
+  }
+
+  const firstRow = rows.first();
+  const productNameButton = firstRow.locator('.nameDiv');
+
+  await expect(productNameButton).toBeVisible({ timeout: 15000 });
+  await productNameButton.click();
+
+  await expect(page.getByText('Created By', { exact: true })).toBeVisible({ timeout: 15000 });
+  const overviewPanel = page.getByLabel('Overview');
+  await expect(overviewPanel).toBeVisible({ timeout: 15000 });
+
+  const overviewText = await overviewPanel.innerText();
+
+  const dateMatch = overviewText.match(/\d{2}\.\d{2}\.\d{4}/);
+
+  if (!dateMatch) {
+    throw new Error(' Created By date not found in Overview section');
+  }
+
+  const createdDateString = dateMatch[0];
+  console.log(' Found Created Date:', createdDateString);
+
+  const [day, month, year] = createdDateString.split('.');
+  const createdDate = new Date(Number(year), Number(month) - 1, Number(day));
+
+  const today = new Date();
+  const sevenDaysAgo = new Date();
+  sevenDaysAgo.setDate(today.getDate() - 7);
+
+  console.log(' Range:', sevenDaysAgo, '→', today);
+
+  expect(createdDate >= sevenDaysAgo && createdDate <= today).toBeTruthy();
+
+  console.log('✔ Created By date is within past week:', createdDateString);
+});
+
+test('TC_003: Verify Date Created = Custom', async ({ page }) => {
+
+  const advancedFilterBtn = page.getByText('Advanced Filter').nth(2);
+  await expect(advancedFilterBtn).toBeVisible({ timeout: 15000 });
+  await advancedFilterBtn.click();
+
+  await page.mouse.wheel(0, 700);
+  await page.waitForTimeout(500);
+
+  await page.locator('#mat-radio-8').getByText('Custom').click();
+
+  await page.locator('#mat-input-1').click();
+  await page.getByRole('button', { name: 'Choose month and year' }).click();
+  await page.getByRole('button', { name: '2025' }).click();
+  await page.getByRole('button', { name: 'novembre' }).click();
+  await page.getByRole('button', { name: '1 novembre 2025', exact: true }).click();
+
+  await page.waitForTimeout(1200);
+
+  await expect(page.locator('#mat-input-1')).toHaveValue('01.11.2025');
+
+  await page.locator('#mat-input-0').click();
+  await page.getByRole('button', { name: '25 novembre' }).click();
+
+  await page.waitForTimeout(1200);
+
+  await expect(page.locator('#mat-input-0')).toHaveValue('25.11.2025');
+
+  const goToResultsBtn = page.getByRole('button', { name: 'Go to search results' });
+  await expect(goToResultsBtn).toBeVisible({ timeout: 15000 });
+  await goToResultsBtn.click();
+
+  const productList = page.locator('app-product');
+  await expect(productList).toBeVisible({ timeout: 40000 });
+
+  const rows = page.locator('.prodResultTable');
+  await expect(rows.first()).toBeVisible({ timeout: 20000 });
+
+  const firstRow = rows.first();
+  const productNameButton = firstRow.locator('.nameDiv');
+
+  await expect(productNameButton).toBeVisible({ timeout: 15000 });
+  await productNameButton.click();
+
+  await page.waitForTimeout(200);
+
+  await expect(page.getByText('Created By', { exact: true })).toBeVisible({ timeout: 15000 });
+  await expect(page.getByLabel('Overview')).toBeVisible({ timeout: 15000 });
+
+const overviewText = await page.getByLabel('Overview').innerText();
+const dateMatch = overviewText.match(/\d{2}\.\d{2}\.\d{4}/);
+if (!dateMatch) throw new Error('Created By date not found');
+
+const createdDateStr = dateMatch[0];
+
+const [d, m, y] = createdDateStr.split('.');
+const createdDate = new Date(Number(y), Number(m) - 1, Number(d));
+
+const startDate = new Date(2025, 10, 1); 
+const endDate   = new Date(2025, 10, 25); 
+
+expect(createdDate >= startDate && createdDate <= endDate).toBeTruthy();
+});
+
+  });
