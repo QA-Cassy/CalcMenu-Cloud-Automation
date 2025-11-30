@@ -48,3 +48,13 @@ export const sodexoLu = {
     },
 }
 
+export const sodexoStaging = {
+  environment: {
+    stagingURL: process.env.SODEXO_STAGING_URL!,
+    email: process.env.SODEXO_STAGING_EMAIL !,
+    password: process.env.SODEXO_STAGING_PASSWORD !,
+    homeURL: process.env.SODEXO_STAGING_HOME_URL!,
+  },
+};
+
+
