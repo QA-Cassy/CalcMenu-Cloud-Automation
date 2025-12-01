@@ -42,11 +42,10 @@ async verifyContains(text: string){
    }
 }
 
-async verifyNoresult (searchValue: string){
-    const productlist = this.page.locator ('app-product');
-   await expect(productlist).toBeVisible({timeout: 20000});
-   await this.page.waitForTimeout(3000);
-   await expect (productlist).toContainText ('No Results Found');
+async verifyNoResults() {
+    const productList = this.page.locator('app-product');
+    await expect(productList).toBeVisible({ timeout: 20000 });
+    await this.page.waitForTimeout(3000);
+    await expect(productList).toContainText('No Results Found');
 }
-
 }

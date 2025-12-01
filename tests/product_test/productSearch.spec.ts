@@ -40,7 +40,7 @@ test.describe('product Search By name', () => {
     const searchValue = 'ABRIkOT';
     const searchPage = new SearchPage (page);
     await searchPage.searchProductByName (searchValue);
-    await searchPage.verifyNoresult (searchValue);
+    await searchPage.verifyNoResults ();
   });
 
 });
