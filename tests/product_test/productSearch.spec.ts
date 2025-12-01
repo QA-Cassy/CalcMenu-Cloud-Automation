@@ -43,9 +43,6 @@ test.describe('product Search By name', () => {
     await searchPage.verifyNoresult (searchValue);
   });
 
-
-
-
 });
 
 

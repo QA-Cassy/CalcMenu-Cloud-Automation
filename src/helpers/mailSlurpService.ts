@@ -1,4 +1,4 @@
-import MailSlurp from "mailslurp-client";
+import { MailSlurp } from 'mailslurp-client';
 import { api } from "../utils/environment";
 
 

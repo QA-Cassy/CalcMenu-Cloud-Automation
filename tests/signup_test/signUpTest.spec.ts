@@ -1,5 +1,4 @@
 import { test } from '@playwright/test';
-import { MailSlurp } from 'mailslurp-client';
 import { api, generic } from '../../src/utils/environment';
 import { SignUpPage } from '../../pages/signup_module/signUpPage';
 import { LoginPage } from '../../pages/login_module/loginPage';

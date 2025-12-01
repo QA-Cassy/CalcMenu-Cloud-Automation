@@ -30,7 +30,7 @@ export class LoginPage {
   }
   
   // OPEN CALCMENU SIGN IN PAGE
-  async goToLogin(link: string) {
+   async goToLogin(link: string) {
     await this.page.goto(link, {
       waitUntil: 'domcontentloaded',
     });
