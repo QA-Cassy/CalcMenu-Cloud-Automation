@@ -39,12 +39,18 @@ export const generic = {
 }
 
 // SODEXOLU ENTERPRISE
-export const sodexoLu = {
+export const sodexoLuLocal = {
     environment: {
         email: process.env.SODEXOLU_EMAIL!,
         password: process.env.SODEXOLU_PASSWORD!,
         localURL: process.env.SODEXOLU_URL_LOCAL!,
         homeURL: process.env.SODEXOLU_HOME_URL!,
+        recipeURL: process.env.SODEXOLU_RECIPE_URL!,
+        basketURL: process.env.SODEXOLU_BASKET_URL!,
+        shoppingListURL: process.env.SODEXOLU_SHOPPING_LIST_URL!,
+        settingsURL: process.env.SODEXOLU_SETTINGS_URL!,
+        settingsAccountTabURL: process.env.SODEDXOLU_SETTINGS_ACCOUNT_TAB_URL!,
+        aboutURL: process.env.SODEXOLU_ABOUT_URL!,
     },
 }
 
