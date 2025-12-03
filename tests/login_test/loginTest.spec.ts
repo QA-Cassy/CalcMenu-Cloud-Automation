@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../../pages/login_module/loginPage';
-import { generic, invalidData, privacyPolicy, sodexoLu, termsOfService } from '../../src/utils/environment';
+import { generic, invalidData, privacyPolicy, sodexoLuLocal, termsOfService } from '../../src/utils/environment';
 import { SignUpPage } from '../../pages/signup_module/signUpPage';
 import { MailSlurpService } from '../../src/helpers/mailSlurpService';
 import { EmailVerificationPage } from '../../pages/signup_module/emailVerificationPage';
@@ -12,21 +12,21 @@ test.describe('TS_01: Login Functionality', () => {
 
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
-    await loginPage.goToLogin(`${sodexoLu.environment.localURL}`);
+    await loginPage.goToLogin(`${sodexoLuLocal.environment.localURL}`);
   });
 
   test('[@enterprise][@regression] TS01_TC001: Login with valid email and valid password', async ({ page }) => {
-    await loginPage.login(sodexoLu.environment.email, sodexoLu.environment.password);
-    await expect(page).toHaveURL(sodexoLu.environment.homeURL);
+    await loginPage.login(sodexoLuLocal.environment.email, sodexoLuLocal.environment.password);
+    await expect(page).toHaveURL(sodexoLuLocal.environment.homeURL);
   })
 
   test('TS01_TC002: Login with invalid email and valid password', async ({ page }) => {
-    await loginPage.login(invalidData.user.invalidEmail, sodexoLu.environment.password);
+    await loginPage.login(invalidData.user.invalidEmail, sodexoLuLocal.environment.password);
     await loginPage.assertInvalidEmaildAddress();
   });
 
   test('TS01_TC003: Login with valid email and invalid password', async ({ page }) => {
-    await loginPage.login(sodexoLu.environment.email, invalidData.user.invalidPassword);
+    await loginPage.login(sodexoLuLocal.environment.email, invalidData.user.invalidPassword);
     await loginPage.assertInvalidPassword();
   });
 
@@ -36,17 +36,17 @@ test.describe('TS_01: Login Functionality', () => {
   });
 
   test('TS01_TC005: Login with unregistered email and password', async ({ page }) => {
-    await loginPage.login(invalidData.user.unregisteredEmail, sodexoLu.environment.password);
+    await loginPage.login(invalidData.user.unregisteredEmail, sodexoLuLocal.environment.password);
     await loginPage.assertInvalidEmaildAddress();
   });
 
   test('TS01_TC006: Login with empty email and valid password', async ({ page }) => {
-    await loginPage.login('', sodexoLu.environment.password);
+    await loginPage.login('', sodexoLuLocal.environment.password);
     await loginPage.assertDisabledLoginButton();
   });
 
   test('TS01_TC007: Login with valid email and empty password', async ({ page }) => {
-    await loginPage.login(sodexoLu.environment.email, '');
+    await loginPage.login(sodexoLuLocal.environment.email, '');
     await loginPage.assertDisabledLoginButton();
   });
 
@@ -116,11 +116,11 @@ test.describe('TS_03: Verify Broken Links', () => {
 
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
-    await loginPage.goToLogin(`${sodexoLu.environment.localURL}`);
+    await loginPage.goToLogin(`${sodexoLuLocal.environment.localURL}`);
   });
 
   test('TS03_TC001: Verify if login page link is not broken', async ({ page }) => {
-    loginPage.assertVerifyURL(page, sodexoLu.environment.localURL);
+    loginPage.assertVerifyURL(page, sodexoLuLocal.environment.localURL);
   });
 
   test('TS03_TC002: Verify if reset password link is not broken', async ({ page }) => {
