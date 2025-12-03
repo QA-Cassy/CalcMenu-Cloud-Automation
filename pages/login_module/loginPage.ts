@@ -1,5 +1,5 @@
 import { expect, Page } from '@playwright/test';
-import { sodexoLu } from '../../src/utils/environment';
+import { sodexoLuLocal } from '../../src/utils/environment';
 
 export class LoginPage {
 
@@ -13,8 +13,8 @@ export class LoginPage {
   readonly privacyPolicyButton;
 
   // VALID CREDENTIALS
-  private readonly validEmail = sodexoLu.environment.email;
-  private readonly validPassword = sodexoLu.environment.password;
+  private readonly validEmail = sodexoLuLocal.environment.email;
+  private readonly validPassword = sodexoLuLocal.environment.password;
 
   // CONSTRUCTOR AND LOCATORS
   constructor(page: Page) {
