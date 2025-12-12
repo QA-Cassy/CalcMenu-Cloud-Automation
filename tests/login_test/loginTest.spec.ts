@@ -12,46 +12,72 @@ test.describe('TS_01: Login Functionality', () => {
 
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
+
+    // Navigate to Sodexo Local Sign In page
     await loginPage.goToLogin(`${sodexoLuLocal.environment.localURL}`);
   });
 
   test('[@enterprise][@regression] TS01_TC001: Login with valid email and valid password', async ({ page }) => {
+    // Login
     await loginPage.login(sodexoLuLocal.environment.email, sodexoLuLocal.environment.password);
+
+    // Verify the login
     await expect(page).toHaveURL(sodexoLuLocal.environment.homeURL);
   })
 
   test('TS01_TC002: Login with invalid email and valid password', async ({ page }) => {
+    // Login
     await loginPage.login(invalidData.user.invalidEmail, sodexoLuLocal.environment.password);
+
+    // Verify the error message
     await loginPage.assertInvalidEmaildAddress();
   });
 
   test('TS01_TC003: Login with valid email and invalid password', async ({ page }) => {
+    // Login
     await loginPage.login(sodexoLuLocal.environment.email, invalidData.user.invalidPassword);
+
+    // // Verify the error message
     await loginPage.assertInvalidPassword();
   });
 
   test('TS01_TC004: Login with invalid email and invalid password', async ({ page }) => {
+    // Login
     await loginPage.login(invalidData.user.invalidEmail, invalidData.user.invalidPassword);
+
+    // Verify the error message
     await loginPage.assertInvalidEmaildAddress();
   });
 
   test('TS01_TC005: Login with unregistered email and password', async ({ page }) => {
+    // Login
     await loginPage.login(invalidData.user.unregisteredEmail, sodexoLuLocal.environment.password);
+
+    // Verify the error message
     await loginPage.assertInvalidEmaildAddress();
   });
 
   test('TS01_TC006: Login with empty email and valid password', async ({ page }) => {
+    // Login
     await loginPage.login('', sodexoLuLocal.environment.password);
+
+    // Verify the state of Login button
     await loginPage.assertDisabledLoginButton();
   });
 
   test('TS01_TC007: Login with valid email and empty password', async ({ page }) => {
+    // Login
     await loginPage.login(sodexoLuLocal.environment.email, '');
+
+    // Verify the state of Login button
     await loginPage.assertDisabledLoginButton();
   });
 
   test('TS01_TC008: Login with empty email and empty password', async ({ page }) => {
+    // Login
     await loginPage.login('', '');
+
+    // Verify the state of Login button
     await loginPage.assertDisabledLoginButton();
   });
 
@@ -116,25 +142,37 @@ test.describe('TS_03: Verify Broken Links', () => {
 
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
+
+    // Navigate to the Sodexo Local Sign In page
     await loginPage.goToLogin(`${sodexoLuLocal.environment.localURL}`);
   });
 
   test('TS03_TC001: Verify if login page link is not broken', async ({ page }) => {
+    // Verify the URL
     loginPage.assertVerifyURL(page, sodexoLuLocal.environment.localURL);
   });
 
   test('TS03_TC002: Verify if reset password link is not broken', async ({ page }) => {
+    // Navigate to the Forgot Credential Password modal
     await loginPage.clickResetPassword();
+
+    // Verify if the modal is visible
     await loginPage.assertResetPasswordModalVisible();
   });
 
   test('TS03_TC003: Verify if terms of service link is not broken', async ({ page }) => {
+    // Navigate to the TOS page
     const popup = await loginPage.clickTermsOfService();
+
+    // Verify if the redirection page is correct
     await loginPage.assertVerifyURL(popup, termsOfService.link.enURL);
   });
 
   test('TS03_TC004: Verify if privacy policy link is not broken', async ({ page }) => {
+    // Navigate to the PP page
     const popup = await loginPage.clickPrivacyPolicy();
+
+    // Verify if the redirection page is correct
     await loginPage.assertVerifyURL(popup, privacyPolicy.link.enURL);
   });
 
