@@ -7,53 +7,53 @@ export class DashboardPage {
         this.page = page;
     }
 
-    // Navigate to Dashboard button
+    // Navigate to home module function
     async goToDashboard() {
         await this.page.getByRole('button').first().click();
     }
 
-    // Click Show More button in Latest Recipes Section
+    // Click Show More button in Latest Recipes Section function
     async clickShowMore() {
         await this.page.getByRole('button', { name: 'Show More' }).click();
     }
 
-    // Click Show All button in Your Basket Section
+    // Click Show All button in Your Basket Section function
     async clickShowAll(index = 0) {
         await this.goToDashboard();
         await this.page.getByRole('button', { name: 'Show All' }).nth(index).click();
     }
 
-    // Click Search bar in Dashboard module
+    // Click Search bar in Dashboard module function
     async clickSearchField() {
         await this.goToDashboard();
         await this.page.getByRole('textbox', { name: 'Search Recipes' }).click();
     }
 
-    // Navigate to Buy More Credits
+    // Navigate to Buy More Credits function
     async clickBuyCredits() {
         await this.goToDashboard();
         await this.page.getByRole('img', { name: 'img' }).click();
     }
 
-    // Navigate to the Basket Page
+    // Navigate to the Basket Page function
     async clickBasketIcon() {
         await this.goToDashboard();
         await this.page.locator('.simpleIconHolderButtonDivs').first().click();
     }
 
-    // Navigate to the Notification Page
+    // Navigate to the Notification Page function
     async clickNotificationIcon() {
         await this.goToDashboard();
         await this.page.locator('.mat-mdc-tooltip-trigger.simpleIconHolderButtonDivs').click();
     }
 
-    // View the User Name Dropdown options
+    // View the User Name Dropdown options function
     async openProfileDropdown() {
         await this.goToDashboard();
         await this.page.getByRole('img', { name: 'menu' }).click();
     }
 
-    // Select an option in the User Name Dropdown
+    // Select an option in the User Name Dropdown function
     async selectDropdownOption(optionName: string) {
         await this.page.getByRole('menuitem', { name: optionName }).click();
     }
@@ -84,6 +84,7 @@ export class DashboardPage {
         await expect(section).toBeVisible();
     }
 
+    // Assertion if the URL is correct
     async assertVerifyURL(url: string) {
         await expect(this.page).toHaveURL(url);
     }
